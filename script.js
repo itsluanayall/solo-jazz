@@ -31,14 +31,15 @@ function startStepMarquee() {
     if (!marqueeEl) return;
 
     const allSteps = [...jazzSteps.startOn1, ...jazzSteps.startOn8, ...basicSteps];
-    const marqueeText = allSteps.join(' • ') + ' • ';
-    // Duplicate for seamless loop
+    const stepText = allSteps.join(' • ');
+    // Repeat enough times for seamless loop
+    const marqueeText = (stepText + ' • ').repeat(4);
+
     const content = document.createElement('div');
     content.className = 'step-marquee-content';
-    content.textContent = marqueeText + marqueeText;
+    content.textContent = marqueeText;
 
     const content2 = content.cloneNode(true);
-    content2.classList.add('step-marquee-content');
 
     marqueeEl.appendChild(content);
     marqueeEl.appendChild(content2);

@@ -46,7 +46,7 @@ body::before {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem 1rem 80px 1rem;
+    padding: 1rem;
     position: relative;
 }
 
@@ -55,7 +55,7 @@ body::before {
     text-align: center;
     max-width: 800px;
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
 }
 
 .display-placeholder {
@@ -233,36 +233,35 @@ body::before {
 
 /* Step marquee */
 .step-marquee {
-    position: absolute;
-    bottom: 70px;
-    left: 0;
-    right: 0;
+    width: 100%;
+    max-width: 400px;
     height: 20px;
     overflow: hidden;
-    pointer-events: none;
+    margin-bottom: 1.5rem;
     text-align: center;
+    opacity: 0.6;
 }
 
 .step-marquee-content {
     display: inline-block;
     white-space: nowrap;
-    font-size: 0.7rem;
-    color: var(--text-dim);
+    font-size: 0.75rem;
+    color: var(--gold);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    animation: marquee 25s linear infinite;
+    animation: marquee 60s linear infinite;
 }
 
 .step-marquee-content:nth-child(2) {
-    animation-delay: -12.5s;
+    animation-delay: -30s;
 }
 
 @keyframes marquee {
     0% {
-        transform: translateX(100%);
+        transform: translateX(0);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
     }
 }
 
