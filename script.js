@@ -5,6 +5,8 @@ let basicSteps = [];
 let mode = '1';
 let drawerOpen = false;
 let hintInterval = null;
+let jazzCount = 2;
+let basicCount = 1;
 
 // Load steps from JSON
 async function loadSteps() {
@@ -72,6 +74,22 @@ modeChips.addEventListener('click', (e) => {
     }
 });
 
+// Stepper controls
+document.querySelectorAll('.stepper-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+        const delta = parseInt(btn.dataset.delta);
+
+        if (target === 'jazzCount') {
+            jazzCount = Math.max(1, Math.min(8, jazzCount + delta));
+            document.getElementById('jazzCount').textContent = jazzCount;
+        } else if (target === 'basicCount') {
+            basicCount = Math.max(0, Math.min(6, basicCount + delta));
+            document.getElementById('basicCount').textContent = basicCount;
+        }
+    });
+});
+
 function updateSettingsIcon() {
     settingsToggle.textContent = '⚙';
 }
@@ -105,8 +123,8 @@ function generate() {
 }
 
 function renderCombo(display) {
-    const n = parseInt(document.getElementById('jazzCount').value) || 2;
-    const m = parseInt(document.getElementById('basicCount').value) || 1;
+    const n = jazzCount;
+    const m = basicCount;
 
     if (mode === 'mixed' && n < 2) {
         display.innerHTML =

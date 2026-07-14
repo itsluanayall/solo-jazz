@@ -38,14 +38,22 @@
 
             <div class="drawer-section">
                 <div class="drawer-label">Count</div>
-                <div class="count-inputs">
-                    <div class="count-input">
-                        <span>Jazz</span>
-                        <input type="number" id="jazzCount" value="2" min="1" max="8">
+                <div class="count-steppers">
+                    <div class="stepper">
+                        <span class="stepper-label">Jazz</span>
+                        <div class="stepper-control">
+                            <button class="stepper-btn" data-target="jazzCount" data-delta="-1">−</button>
+                            <span class="stepper-value" id="jazzCount">2</span>
+                            <button class="stepper-btn" data-target="jazzCount" data-delta="1">+</button>
+                        </div>
                     </div>
-                    <div class="count-input">
-                        <span>Basic</span>
-                        <input type="number" id="basicCount" value="1" min="0" max="6">
+                    <div class="stepper">
+                        <span class="stepper-label">Basic</span>
+                        <div class="stepper-control">
+                            <button class="stepper-btn" data-target="basicCount" data-delta="-1">−</button>
+                            <span class="stepper-value" id="basicCount">1</span>
+                            <button class="stepper-btn" data-target="basicCount" data-delta="1">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
