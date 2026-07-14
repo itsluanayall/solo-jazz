@@ -214,6 +214,7 @@ body::before {
     overflow: hidden;
     animation: breathe 4s ease-in-out infinite;
     box-shadow: var(--shadow-md);
+    touch-action: manipulation;
 }
 
 .hit-zone:hover {
@@ -351,6 +352,7 @@ body::before {
     justify-content: center;
     color: var(--text-dim);
     font-size: var(--font-size-xs);
+    touch-action: manipulation;
 }
 
 .drawer-content {
@@ -389,6 +391,7 @@ body::before {
     font-size: var(--font-size-base);
     cursor: pointer;
     transition: all var(--transition-fast);
+    touch-action: manipulation;
 }
 
 .chip:hover {
@@ -476,6 +479,7 @@ body::before {
     justify-content: center;
     transition: all var(--transition-fast);
     font-weight: 300;
+    touch-action: manipulation;
 }
 
 .stepper-btn:hover {
@@ -520,6 +524,7 @@ body::before {
     transition: opacity var(--transition-base);
     box-shadow: var(--shadow-md);
     color: var(--text-dim);
+    touch-action: manipulation;
 }
 
 .settings-toggle:hover {
@@ -542,6 +547,7 @@ body::before {
     transition: opacity var(--transition-base);
     box-shadow: var(--shadow-md);
     color: var(--text-dim);
+    touch-action: manipulation;
 }
 
 .share-toggle:hover {
@@ -600,6 +606,7 @@ body::before {
     justify-content: center;
     color: var(--text-dim);
     transition: all var(--transition-fast);
+    touch-action: manipulation;
 }
 
 .share-modal-close:hover {
