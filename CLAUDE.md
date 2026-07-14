@@ -58,12 +58,14 @@ Space and Enter trigger generation with centered ripple effect.
 
 ## Design Tokens
 
-Colors (defined in `:root`):
-- `--bg` / `--surface` — Dark background layers
-- `--coral` — Primary accent (hit-zone hover, active states)
-- `--gold` — Marquee text
-- `--mint` — Basic step cards border/gradient
-- `--text` / `--text-dim` — Typography hierarchy
+Colors (defined in `:root`, from coolors.co palette, light theme):
+- `--bg: #F5F5F3` — Light background
+- `--surface: #DBDBDB` — Surface layers
+- `--coral: #F33A15` — Primary accent (hit-zone, active chips)
+- `--gold: #E0B508` — Marquee text
+- `--mint: #54AEC5` — Basic step cards border/gradient
+- `--text: #2C2F2D` — Primary text (derived dark)
+- `--text-dim: #737A74` — Secondary text
 
 Typography:
 - `Space Grotesk` (500, 700) — Display text, step cards, labels
