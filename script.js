@@ -135,24 +135,24 @@ function renderCombo(display) {
 
     let html = '<div class="combo">';
 
-    // Jazz steps
+    // Jazz steps section
+    html += '<div class="combo-section">';
+    html += '<div class="combo-section-label">Jazz Steps</div>';
     html += '<div class="combo-row">';
     selectedJazz.forEach((step, i) => {
-        html += `<div class="step-card" style="animation-delay: ${i * 0.08}s">
-            <span class="count">${COUNTS[i]}</span>${step}
-        </div>`;
+        html += `<div class="step-card" style="animation-delay: ${i * 0.08}s">${step}</div>`;
     });
-    html += '</div>';
+    html += '</div></div>';
 
-    // Basic steps
+    // Basic steps section
     if (selectedBasic.length > 0) {
+        html += '<div class="combo-section">';
+        html += '<div class="combo-section-label">Basic Steps</div>';
         html += '<div class="combo-row">';
         selectedBasic.forEach((step, i) => {
-            html += `<div class="step-card basic" style="animation-delay: ${(selectedJazz.length + i) * 0.08}s">
-                <span class="count">${COUNTS[i]}</span>${step}
-            </div>`;
+            html += `<div class="step-card basic" style="animation-delay: ${(selectedJazz.length + i) * 0.08}s">${step}</div>`;
         });
-        html += '</div>';
+        html += '</div></div>';
     }
 
     html += '</div>';
