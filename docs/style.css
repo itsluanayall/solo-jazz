@@ -273,7 +273,7 @@ body::before {
 .hit-zone .icon {
     width: 24px;
     height: 24px;
-    color: var(--coral);
+    color: #a36db0;
 }
 
 .hit-zone .label {
