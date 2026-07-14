@@ -7,13 +7,18 @@ let drawerOpen = false;
 
 // Load steps from JSON
 async function loadSteps() {
+    const display = document.getElementById('display');
+    display.innerHTML = '<div class="display-loading">Loading steps…</div>';
+
     try {
         const response = await fetch('steps.json');
         const data = await response.json();
         jazzSteps = data.jazz;
         basicSteps = data.basic;
+        display.innerHTML = '<div class="display-placeholder">Tap to generate a combination</div>';
     } catch (error) {
         console.error('Failed to load steps:', error);
+        display.innerHTML = '<div class="display-placeholder">Failed to load. Refresh to try again.</div>';
     }
 }
 

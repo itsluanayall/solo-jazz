@@ -48,6 +48,19 @@ body {
     text-transform: uppercase;
 }
 
+.display-loading {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
 .combo {
     display: flex;
     flex-direction: column;
