@@ -61,9 +61,7 @@ function toggleDrawer() {
 }
 
 drawerHandle.addEventListener('click', toggleDrawer);
-settingsToggle.addEventListener('click', () => {
-    if (!drawerOpen) toggleDrawer();
-});
+settingsToggle.addEventListener('click', toggleDrawer);
 
 // Close drawer when clicking outside
 document.addEventListener('click', (e) => {
