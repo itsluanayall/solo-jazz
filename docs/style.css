@@ -299,11 +299,11 @@ body::before {
     color: var(--lavender);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    animation: marquee 120s linear infinite;
+    animation: marquee 200s linear infinite;
 }
 
 .step-marquee-content:nth-child(2) {
-    animation-delay: -60s;
+    animation-delay: -100s;
 }
 
 @keyframes marquee {
