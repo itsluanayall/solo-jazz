@@ -1,5 +1,3 @@
-const COUNTS = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧'];
-
 let jazzSteps = { startOn1: [], startOn8: [] };
 let basicSteps = [];
 let mode = '1';
