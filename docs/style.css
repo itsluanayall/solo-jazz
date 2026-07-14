@@ -498,6 +498,19 @@ body::before {
     color: var(--text);
 }
 
+/* Signature */
+.signature {
+    position: fixed;
+    bottom: var(--space-lg);
+    left: var(--space-lg);
+    font-family: var(--font-body);
+    font-size: var(--font-size-xs);
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    z-index: 10;
+}
+
 /* Header toggles container */
 .header-toggles {
     position: fixed;
