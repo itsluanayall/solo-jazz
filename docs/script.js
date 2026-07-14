@@ -56,6 +56,7 @@ const settingsToggle = document.getElementById('settingsToggle');
 function toggleDrawer() {
     drawerOpen = !drawerOpen;
     drawer.classList.toggle('open', drawerOpen);
+    drawer.setAttribute('aria-hidden', !drawerOpen);
 }
 
 drawerHandle.addEventListener('click', toggleDrawer);
