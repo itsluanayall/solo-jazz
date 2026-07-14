@@ -63,11 +63,26 @@ function pickRandomExcluding(arr, count, exclude) {
 
 // Generate
 function generate() {
+    const display = document.getElementById('display');
+
+    // Exit animation for existing cards
+    const existingCards = display.querySelectorAll('.step-card');
+    if (existingCards.length > 0) {
+        existingCards.forEach(card => card.classList.add('exiting'));
+        setTimeout(() => {
+            renderCombo(display);
+        }, 250);
+    } else {
+        renderCombo(display);
+    }
+}
+
+function renderCombo(display) {
     const n = parseInt(document.getElementById('jazzCount').value) || 2;
     const m = parseInt(document.getElementById('basicCount').value) || 1;
 
     if (mode === 'mixed' && n < 2) {
-        document.getElementById('display').innerHTML =
+        display.innerHTML =
             '<div class="display-placeholder">Mixed mode needs at least 2 jazz steps</div>';
         return;
     }
@@ -91,7 +106,6 @@ function generate() {
 
     const selectedBasic = pickRandom(basicSteps, m);
 
-    const display = document.getElementById('display');
     let html = '<div class="combo">';
 
     // Jazz steps
