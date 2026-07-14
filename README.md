@@ -8,6 +8,6 @@ Tap **Generate** (or press Space/Enter) to get new combinations. Open settings t
 
 ## Dev
 
-Open `index.html` in a browser. No build step.
+Open `docs/index.html` in a browser. No build step.
 
-Edit `steps.json` to add/change steps.
+Edit `docs/steps.json` to add/change steps.

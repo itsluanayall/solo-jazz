@@ -12,22 +12,25 @@ A jazz solo practice web app that generates random combinations of jazz and basi
 
 ```bash
 # Just open the HTML file in a browser
-open index.html
+open docs/index.html
 # or serve locally (e.g., python)
-python -m http.server 8000
+python -m http.server 8000 --directory dist
 ```
 
 ## File Structure
 
-- `index.html` — Main app structure with stage, display, marquee, hit-zone, and drawer
-- `script.js` — All logic: step loading, generation, drawer, steppers, ripple effects, keyboard support
-- `style.css` — All styles with CSS custom properties for colors
-- `steps.json` — Step data: `jazz.startOn1`, `jazz.startOn8`, and `basic` arrays
+```
+docs/
+├── index.html   — Main app structure with stage, display, marquee, hit-zone, and drawer
+├── script.js    — All logic: step loading, generation, drawer, steppers, ripple effects, keyboard support
+├── style.css    — All styles with CSS custom properties for colors
+└── steps.json   — Step data: `jazz.startOn1`, `jazz.startOn8`, and `basic` arrays
+```
 
 ## Key Architecture Patterns
 
 ### Data Flow
-1. `loadSteps()` fetches `steps.json` on init, populates `jazzSteps` and `basicSteps`
+1. `loadSteps()` fetches `docs/steps.json` on init, populates `jazzSteps` and `basicSteps`
 2. `generate()` creates step combinations based on current mode and counts
 3. `renderCombo()` renders jazz and basic steps as cards with staggered animations
 
@@ -75,11 +78,11 @@ Subtle film grain overlay via SVG noise at 3% opacity.
 
 ## Common Changes
 
-Adding steps: Edit `steps.json` arrays.
+Adding steps: Edit `docs/steps.json` arrays.
 
-Styling: All in `style.css` with CSS custom properties for easy color tweaks.
+Styling: All in `docs/style.css` with CSS custom properties for easy color tweaks.
 
-Behavior changes: Most logic in `script.js` is straightforward event handlers and helper functions.
+Behavior changes: Most logic in `docs/script.js` is straightforward event handlers and helper functions.
 
 ## Documentation Maintenance
 
