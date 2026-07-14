@@ -118,12 +118,14 @@ body {
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+    animation: breathe 4s ease-in-out infinite;
 }
 
 .hit-zone:hover {
     border-color: var(--coral);
     background: linear-gradient(135deg, var(--surface) 0%, rgba(255,107,107,0.05) 100%);
     transform: scale(1.02);
+    animation: none;
 }
 
 .hit-zone:active {
@@ -141,6 +143,17 @@ body {
 
 .hit-zone:hover::before {
     opacity: 1;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        border-color: rgba(255,255,255,0.1);
+    }
+    50% {
+        transform: scale(1.015);
+        border-color: rgba(255,255,255,0.15);
+    }
 }
 
 /* Ripple effect */
