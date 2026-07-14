@@ -161,4 +161,21 @@ hitZone.addEventListener('click', (e) => {
     createRipple(e);
     generate();
 });
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' || e.code === 'Enter') {
+        e.preventDefault();
+        // Trigger ripple at center of hit zone
+        const rect = hitZone.getBoundingClientRect();
+        const fakeEvent = {
+            currentTarget: hitZone,
+            clientX: rect.left + rect.width / 2,
+            clientY: rect.top + rect.height / 2
+        };
+        createRipple(fakeEvent);
+        generate();
+    }
+});
+
 loadSteps();
