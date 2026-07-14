@@ -6,6 +6,8 @@ let mode = '1';
 let drawerOpen = false;
 let jazzCount = 2;
 let basicCount = 1;
+let maxJazzCount = 8;
+let maxBasicCount = 6;
 let qrCode = null;
 
 // Load steps from JSON
@@ -18,6 +20,8 @@ async function loadSteps() {
         const data = await response.json();
         jazzSteps = data.jazz;
         basicSteps = data.basic;
+        maxJazzCount = jazzSteps.startOn1.length + jazzSteps.startOn8.length;
+        maxBasicCount = basicSteps.length;
         display.innerHTML = '<div class="display-placeholder">Tap to generate a combination</div>';
         startStepMarquee();
     } catch (error) {
@@ -85,10 +89,10 @@ document.querySelectorAll('.stepper-btn').forEach(btn => {
         const delta = parseInt(btn.dataset.delta);
 
         if (target === 'jazzCount') {
-            jazzCount = Math.max(1, Math.min(8, jazzCount + delta));
+            jazzCount = Math.max(1, Math.min(maxJazzCount, jazzCount + delta));
             document.getElementById('jazzCount').textContent = jazzCount;
         } else if (target === 'basicCount') {
-            basicCount = Math.max(0, Math.min(6, basicCount + delta));
+            basicCount = Math.max(0, Math.min(maxBasicCount, basicCount + delta));
             document.getElementById('basicCount').textContent = basicCount;
         }
     });
