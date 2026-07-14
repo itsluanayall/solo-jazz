@@ -4,7 +4,6 @@ let jazzSteps = { startOn1: [], startOn8: [] };
 let basicSteps = [];
 let mode = '1';
 let drawerOpen = false;
-let hintInterval = null;
 let jazzCount = 2;
 let basicCount = 1;
 
@@ -19,27 +18,30 @@ async function loadSteps() {
         jazzSteps = data.jazz;
         basicSteps = data.basic;
         display.innerHTML = '<div class="display-placeholder">Tap to generate a combination</div>';
-        startStepHint();
+        startStepMarquee();
     } catch (error) {
         console.error('Failed to load steps:', error);
         display.innerHTML = '<div class="display-placeholder">Failed to load. Refresh to try again.</div>';
     }
 }
 
-// Step hint cycling
-function startStepHint() {
-    const hintEl = document.getElementById('stepHint');
-    if (!hintEl) return;
+// Step marquee
+function startStepMarquee() {
+    const marqueeEl = document.getElementById('stepMarquee');
+    if (!marqueeEl) return;
 
     const allSteps = [...jazzSteps.startOn1, ...jazzSteps.startOn8, ...basicSteps];
-    let currentIndex = 0;
+    const marqueeText = allSteps.join(' • ') + ' • ';
+    // Duplicate for seamless loop
+    const content = document.createElement('div');
+    content.className = 'step-marquee-content';
+    content.textContent = marqueeText + marqueeText;
 
-    hintEl.textContent = allSteps[0];
+    const content2 = content.cloneNode(true);
+    content2.classList.add('step-marquee-content');
 
-    hintInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % allSteps.length;
-        hintEl.textContent = allSteps[currentIndex];
-    }, 2000);
+    marqueeEl.appendChild(content);
+    marqueeEl.appendChild(content2);
 }
 
 // Settings drawer
