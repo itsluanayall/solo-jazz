@@ -46,8 +46,14 @@ modeChips.addEventListener('click', (e) => {
         modeChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
         e.target.classList.add('active');
         mode = e.target.dataset.mode;
+        updateSettingsIcon();
     }
 });
+
+function updateSettingsIcon() {
+    const modeLabel = mode === 'mixed' ? 'Mix' : mode;
+    settingsToggle.textContent = `⚙ ${modeLabel}`;
+}
 
 // Random helpers
 function pickRandom(arr, count) {
@@ -178,4 +184,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Initialize
+updateSettingsIcon();
 loadSteps();
