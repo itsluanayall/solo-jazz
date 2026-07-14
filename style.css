@@ -226,6 +226,25 @@ body::before {
     text-transform: uppercase;
 }
 
+/* Step hint animation */
+.hit-zone .step-hint {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.hit-zone:hover .step-hint {
+    opacity: 1;
+}
+
 /* Controls drawer - slides up */
 .drawer {
     position: fixed;

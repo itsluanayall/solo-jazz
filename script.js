@@ -4,6 +4,7 @@ let jazzSteps = { startOn1: [], startOn8: [] };
 let basicSteps = [];
 let mode = '1';
 let drawerOpen = false;
+let hintInterval = null;
 
 // Load steps from JSON
 async function loadSteps() {
@@ -16,10 +17,27 @@ async function loadSteps() {
         jazzSteps = data.jazz;
         basicSteps = data.basic;
         display.innerHTML = '<div class="display-placeholder">Tap to generate a combination</div>';
+        startStepHint();
     } catch (error) {
         console.error('Failed to load steps:', error);
         display.innerHTML = '<div class="display-placeholder">Failed to load. Refresh to try again.</div>';
     }
+}
+
+// Step hint cycling
+function startStepHint() {
+    const hintEl = document.getElementById('stepHint');
+    if (!hintEl) return;
+
+    const allSteps = [...jazzSteps.startOn1, ...jazzSteps.startOn8, ...basicSteps];
+    let currentIndex = 0;
+
+    hintEl.textContent = allSteps[0];
+
+    hintInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % allSteps.length;
+        hintEl.textContent = allSteps[currentIndex];
+    }, 2000);
 }
 
 // Settings drawer
