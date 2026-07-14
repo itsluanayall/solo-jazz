@@ -270,5 +270,64 @@ shareModal.addEventListener('click', (e) => {
     }
 });
 
+// Share buttons
+document.querySelectorAll('.share-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const platform = btn.dataset.platform;
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent('Check out this Jazz Solo Practice app!');
+
+        if (platform === 'whatsapp') {
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        } else if (platform === 'telegram') {
+            window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+        } else if (platform === 'copy') {
+            // Fallback copy function for mobile devices
+            function copyToClipboard(text) {
+                // Try modern API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                // Fallback for mobile and older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                textArea.style.top = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    return Promise.resolve();
+                } catch (err) {
+                    document.body.removeChild(textArea);
+                    return Promise.reject(err);
+                }
+            }
+
+            copyToClipboard(window.location.href).then(() => {
+                const span = btn.querySelector('span');
+                const originalText = span.textContent;
+                btn.classList.add('copy-success');
+                span.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.classList.remove('copy-success');
+                    span.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                const span = btn.querySelector('span');
+                const originalText = span.textContent;
+                span.textContent = 'Failed';
+                setTimeout(() => {
+                    span.textContent = originalText;
+                }, 2000);
+            });
+        }
+    });
+});
+
 // Initialize
 loadSteps();
