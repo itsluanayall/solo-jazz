@@ -7,9 +7,19 @@
     --gold: #E0B508;
     --mint: #54AEC5;
     --lavender: #C490D1;
+    --lavender-light: #d6b7dd;
+    --lavender-dark: #a36db0;
     --gray: #737A74;
     --text: #2C2F2D;
     --text-dim: #737A74;
+
+    /* Opacity / Overlay */
+    --grain-opacity: 0.03;
+    --overlay-dark: rgba(0, 0, 0, 0.5);
+    --overlay-black-light: rgba(0, 0, 0, 0.08);
+    --overlay-black-medium: rgba(0, 0, 0, 0.15);
+    --overlay-gray-light: rgba(115, 122, 116, 0.12);
+    --mint-faded: rgba(84, 174, 197, 0.08);
 
     /* Borders */
     --border-light: rgba(0,0,0,0.08);
@@ -30,12 +40,25 @@
     --space-lg: 1rem;
     --space-xl: 1.5rem;
     --space-2xl: 2rem;
+    --space-input: 0.6rem;
+    --space-chip: 0.9rem;
 
     /* Radii */
     --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
     --radius-full: 30px;
+
+    /* Sizes */
+    --size-icon-sm: 20px;
+    --size-icon-md: 24px;
+    --size-icon-lg: 32px;
+    --size-btn: 36px;
+    --size-toggle: 40px;
+    --size-drawer-handle-w: 48px;
+    --size-drawer-handle-h: 20px;
+    --offset-drawer-handle: -20px;
 
     /* Typography */
     --font-body: 'Inter', system-ui, sans-serif;
@@ -48,11 +71,21 @@
     --font-size-xl: 1.1rem;
     --font-size-2xl: 1.3rem;
     --font-size-3xl: 1.5rem;
+    --font-size-responsive: 1.3rem;
 
     /* Transitions */
     --transition-fast: 0.15s;
     --transition-base: 0.2s;
     --transition-slow: 0.3s;
+
+    /* Letter-spacing */
+    --letter-tight: 0.08em;
+    --letter-base: 0.1em;
+    --letter-normal: 0.12em;
+    --letter-wide: 0.15em;
+
+    /* Line-height */
+    --line-tight: 1.3;
 }
 
 * {
@@ -76,7 +109,7 @@ body::before {
     position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    opacity: var(--grain-opacity);
     pointer-events: none;
     z-index: 1;
 }
@@ -108,14 +141,14 @@ body::before {
 .display-placeholder {
     color: var(--text-dim);
     font-size: var(--font-size-base);
-    letter-spacing: 0.15em;
+    letter-spacing: var(--letter-wide);
     text-transform: uppercase;
 }
 
 .display-loading {
     color: var(--text-dim);
     font-size: var(--font-size-base);
-    letter-spacing: 0.15em;
+    letter-spacing: var(--letter-wide);
     text-transform: uppercase;
     animation: pulse 1.5s ease-in-out infinite;
 }
@@ -142,7 +175,7 @@ body::before {
     font-size: var(--font-size-base);
     color: var(--text-dim);
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: var(--letter-wide);
     margin-bottom: var(--space-xs);
 }
 
@@ -171,7 +204,7 @@ body::before {
 
 .step-card.basic {
     border-color: var(--mint);
-    background: linear-gradient(135deg, rgba(84,174,197,0.08) 0%, transparent 100%);
+    background: linear-gradient(135deg, var(--mint-faded) 0%, transparent 100%);
 }
 
 @keyframes cardIn {
@@ -233,7 +266,7 @@ body::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(115,122,116,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle at center, var(--overlay-gray-light) 0%, transparent 70%);
     opacity: 0;
     transition: opacity var(--transition-base);
 }
@@ -257,7 +290,7 @@ body::before {
 .ripple {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,0,0,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--overlay-black-medium) 0%, transparent 70%);
     transform: scale(0);
     animation: ripple 0.6s ease-out;
     pointer-events: none;
@@ -271,16 +304,16 @@ body::before {
 }
 
 .hit-zone .icon {
-    width: 24px;
-    height: 24px;
-    color: #a36db0;
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+    color: var(--lavender-dark);
 }
 
 .hit-zone .label {
     font-family: var(--font-display);
     font-weight: 700;
     font-size: var(--font-size-lg);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--letter-tight);
     text-transform: uppercase;
 }
 
@@ -300,7 +333,7 @@ body::before {
     white-space: nowrap;
     font-size: var(--font-size-sm);
     color: var(--lavender);
-    letter-spacing: 0.15em;
+    letter-spacing: var(--letter-wide);
     text-transform: uppercase;
     animation: marquee 200s linear infinite;
 }
@@ -339,11 +372,11 @@ body::before {
 
 .drawer-handle {
     position: absolute;
-    top: -20px;
+    top: var(--offset-drawer-handle);
     left: 50%;
     transform: translateX(-50%);
-    width: 48px;
-    height: 20px;
+    width: var(--size-drawer-handle-w);
+    height: var(--size-drawer-handle-h);
     background: var(--white);
     border: 1px solid var(--border-light);
     border-bottom: none;
@@ -358,8 +391,8 @@ body::before {
 }
 
 .drawer-handle svg {
-    width: 24px;
-    height: 24px;
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
 }
 
 .drawer-content {
@@ -379,7 +412,7 @@ body::before {
     font-size: var(--font-size-md);
     color: var(--text-dim);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: var(--letter-normal);
     margin-bottom: var(--space-md);
 }
 
@@ -390,9 +423,9 @@ body::before {
 }
 
 .chip {
-    padding: var(--space-sm) 0.9rem;
+    padding: var(--space-sm) var(--space-chip);
     border: 1px solid var(--border-dark);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     background: var(--surface);
     color: var(--text);
     font-size: var(--font-size-base);
@@ -425,7 +458,7 @@ body::before {
 
 .count-input input {
     width: 100%;
-    padding: 0.6rem;
+    padding: var(--space-input);
     border: 1px solid var(--border-dark);
     border-radius: var(--radius-sm);
     background: transparent;
@@ -468,13 +501,13 @@ body::before {
     gap: var(--space-sm);
     background: var(--bg);
     border: 1px solid var(--border-medium);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     padding: var(--space-xs);
 }
 
 .stepper-btn {
-    width: 36px;
-    height: 36px;
+    width: var(--size-btn);
+    height: var(--size-btn);
     border: none;
     background: var(--surface);
     color: var(--text);
@@ -491,12 +524,12 @@ body::before {
 }
 
 .stepper-btn svg {
-    width: 20px;
-    height: 20px;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
 }
 
 .stepper-btn:hover {
-    background: rgba(0,0,0,0.08);
+    background: var(--overlay-black-light);
 }
 
 .stepper-btn:active {
@@ -519,7 +552,7 @@ body::before {
     font-family: var(--font-body);
     font-size: var(--font-size-xs);
     color: var(--text-dim);
-    letter-spacing: 0.1em;
+    letter-spacing: var(--letter-base);
     opacity: 0.5;
     z-index: 10;
 }
@@ -536,8 +569,8 @@ body::before {
 
 /* Settings toggle */
 .settings-toggle {
-    width: 40px;
-    height: 40px;
+    width: var(--size-toggle);
+    height: var(--size-toggle);
     border-radius: 50%;
     background: var(--surface);
     border: 1px solid var(--border-medium);
@@ -554,8 +587,8 @@ body::before {
 }
 
 .settings-toggle svg {
-    width: 20px;
-    height: 20px;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
 }
 
 .settings-toggle:hover {
@@ -564,8 +597,8 @@ body::before {
 
 /* Share toggle */
 .share-toggle {
-    width: 40px;
-    height: 40px;
+    width: var(--size-toggle);
+    height: var(--size-toggle);
     border-radius: 50%;
     background: var(--surface);
     border: 1px solid var(--border-medium);
@@ -582,8 +615,8 @@ body::before {
 }
 
 .share-toggle svg {
-    width: 20px;
-    height: 20px;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
     display: block;
 }
 
@@ -595,7 +628,7 @@ body::before {
 .share-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--overlay-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -631,8 +664,8 @@ body::before {
     position: absolute;
     top: var(--space-sm);
     right: var(--space-sm);
-    width: 32px;
-    height: 32px;
+    width: var(--size-icon-lg);
+    height: var(--size-icon-lg);
     border: none;
     background: var(--surface);
     border-radius: 50%;
@@ -648,8 +681,8 @@ body::before {
 }
 
 .share-modal-close svg {
-    width: 20px;
-    height: 20px;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
 }
 
 .share-modal-close:hover {
@@ -661,9 +694,9 @@ body::before {
     font-family: var(--font-display);
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: #d6b7dd;
+    color: var(--lavender-light);
     margin-bottom: var(--space-xl);
-    line-height: 1.3;
+    line-height: var(--line-tight);
 }
 
 .share-modal-qr {
@@ -696,7 +729,7 @@ body::before {
     }
 
     .step-card {
-        font-size: 1.3rem;
+        font-size: var(--font-size-responsive);
         padding: 0.7rem var(--space-lg);
     }
 }
