@@ -19,7 +19,9 @@
         <div class="step-marquee" id="stepMarquee"></div>
 
         <div class="hit-zone" id="hitZone">
-            <span class="icon">↻</span>
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+            </svg>
             <span class="label">Generate</span>
         </div>
     </div>
@@ -27,12 +29,24 @@
     <div class="signature">Made with ♥<br>by itsluanayall</div>
 
     <div class="header-toggles">
-        <div class="share-toggle" id="shareToggle" title="Share">↗</div>
-        <div class="settings-toggle" id="settingsToggle">⚙</div>
+        <div class="share-toggle" id="shareToggle" title="Share">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+            </svg>
+        </div>
+        <div class="settings-toggle" id="settingsToggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+        </div>
     </div>
 
     <div class="drawer" id="drawer">
-        <div class="drawer-handle" id="drawerHandle">═══</div>
+        <div class="drawer-handle" id="drawerHandle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" x2="19" y1="12" y2="12"/>
+            </svg>
+        </div>
         <div class="drawer-content">
             <div class="drawer-section">
                 <div class="drawer-label">Steps start on</div>
@@ -49,17 +63,33 @@
                     <div class="stepper">
                         <span class="stepper-label">Jazz</span>
                         <div class="stepper-control">
-                            <button class="stepper-btn" data-target="jazzCount" data-delta="-1">−</button>
+                            <button class="stepper-btn" data-target="jazzCount" data-delta="-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"/>
+                                </svg>
+                            </button>
                             <span class="stepper-value" id="jazzCount">2</span>
-                            <button class="stepper-btn" data-target="jazzCount" data-delta="1">+</button>
+                            <button class="stepper-btn" data-target="jazzCount" data-delta="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"/><path d="M12 5v14"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <div class="stepper">
                         <span class="stepper-label">Basic</span>
                         <div class="stepper-control">
-                            <button class="stepper-btn" data-target="basicCount" data-delta="-1">−</button>
+                            <button class="stepper-btn" data-target="basicCount" data-delta="-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"/>
+                                </svg>
+                            </button>
                             <span class="stepper-value" id="basicCount">1</span>
-                            <button class="stepper-btn" data-target="basicCount" data-delta="1">+</button>
+                            <button class="stepper-btn" data-target="basicCount" data-delta="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"/><path d="M12 5v14"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -70,7 +100,11 @@
     <!-- Share QR Code Modal -->
     <div class="share-modal" id="shareModal">
         <div class="share-modal-content">
-            <button class="share-modal-close" id="shareModalClose">×</button>
+            <button class="share-modal-close" id="shareModalClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+            </button>
             <div class="share-modal-header">Share with a fellow dancer!</div>
             <div class="share-modal-qr" id="shareQrCode"></div>
             <div class="share-modal-url" id="shareUrl"></div>

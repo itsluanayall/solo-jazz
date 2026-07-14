@@ -98,10 +98,6 @@ document.querySelectorAll('.stepper-btn').forEach(btn => {
     });
 });
 
-function updateSettingsIcon() {
-    settingsToggle.textContent = '⚙';
-}
-
 // Random helpers
 function pickRandom(arr, count) {
     const actualCount = Math.min(count, arr.length);
@@ -278,5 +274,4 @@ shareModal.addEventListener('click', (e) => {
 });
 
 // Initialize
-updateSettingsIcon();
 loadSteps();

@@ -271,7 +271,9 @@ body::before {
 }
 
 .hit-zone .icon {
-    font-size: var(--font-size-2xl);
+    width: 24px;
+    height: 24px;
+    color: var(--coral);
 }
 
 .hit-zone .label {
@@ -353,6 +355,11 @@ body::before {
     color: var(--text-dim);
     font-size: var(--font-size-xs);
     touch-action: manipulation;
+}
+
+.drawer-handle svg {
+    width: 24px;
+    height: 24px;
 }
 
 .drawer-content {
@@ -480,6 +487,12 @@ body::before {
     transition: all var(--transition-fast);
     font-weight: 300;
     touch-action: manipulation;
+    padding: 0;
+}
+
+.stepper-btn svg {
+    width: 20px;
+    height: 20px;
 }
 
 .stepper-btn:hover {
@@ -540,6 +553,11 @@ body::before {
     touch-action: manipulation;
 }
 
+.settings-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
 .settings-toggle:hover {
     opacity: 1;
 }
@@ -561,6 +579,11 @@ body::before {
     box-shadow: var(--shadow-md);
     color: var(--text-dim);
     touch-action: manipulation;
+}
+
+.share-toggle svg {
+    width: 20px;
+    height: 20px;
 }
 
 .share-toggle:hover {
@@ -620,6 +643,12 @@ body::before {
     color: var(--text-dim);
     transition: all var(--transition-fast);
     touch-action: manipulation;
+    padding: 0;
+}
+
+.share-modal-close svg {
+    width: 20px;
+    height: 20px;
 }
 
 .share-modal-close:hover {
