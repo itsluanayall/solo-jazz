@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jazz Solo Improv Practice</title>
+    <title>Jazz Solo Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #080806;
+            --surface: #121210;
+            --coral: #FF6B6B;
+            --gold: #FFD93D;
+            --mint: #4ECDC4;
+            --text: #FAFAF9;
+            --text-dim: #5C5A58;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,182 +25,347 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #1a1a1e;
-            color: #f0f0f0;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Full screen stage */
+        .stage {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem 1rem;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
         }
 
-        .container {
-            max-width: 500px;
-            width: 100%;
-        }
-
-        h1 {
+        /* Result display - takes focus */
+        .display {
             text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.75rem;
-            font-weight: 600;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 3rem;
         }
 
-        .controls {
-            background: #2a2a2e;
-            padding: 1.5rem;
+        .display-placeholder {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .combo {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .combo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .step-card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 12px;
-            margin-bottom: 2rem;
+            padding: 0.6rem 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: cardIn 0.4s ease backwards;
         }
 
-        .control-group {
-            margin-bottom: 1.25rem;
+        .step-card .count {
+            color: var(--gold);
+            font-size: 0.85em;
+            font-weight: 700;
         }
 
-        .control-group:last-child {
+        .step-card.basic {
+            border-color: var(--mint);
+            background: linear-gradient(135deg, rgba(78,205,196,0.08) 0%, transparent 100%);
+        }
+
+        .step-card.basic .count {
+            color: var(--mint);
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.92);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Giant hit zone */
+        .hit-zone {
+            width: 100%;
+            max-width: 400px;
+            height: 60px;
+            border-radius: 30px;
+            background: var(--surface);
+            border: 2px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hit-zone:hover {
+            border-color: var(--coral);
+            background: linear-gradient(135deg, var(--surface) 0%, rgba(255,107,107,0.05) 100%);
+            transform: scale(1.02);
+        }
+
+        .hit-zone:active {
+            transform: scale(0.98);
+        }
+
+        .hit-zone::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,107,107,0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .hit-zone:hover::before {
+            opacity: 1;
+        }
+
+        .hit-zone .icon {
+            font-size: 1.3rem;
+        }
+
+        .hit-zone .label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* Controls drawer - slides up */
+        .drawer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+
+        .drawer.open {
+            transform: translateY(0);
+        }
+
+        .drawer-handle {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 48px;
+            height: 20px;
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+        }
+
+        .drawer-content {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .drawer-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .drawer-section:last-child {
             margin-bottom: 0;
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: #a0a0a0;
+        .drawer-label {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.75rem;
         }
 
-        .toggle-group {
+        .mode-chips {
             display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 0.5rem 0.9rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .chip:hover {
+            border-color: var(--text);
+        }
+
+        .chip.active {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+
+        .count-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .count-input {
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
         }
 
-        .toggle-btn {
-            flex: 1;
-            padding: 0.6rem 0.75rem;
-            border: 1px solid #3a3a3e;
-            background: #252529;
-            color: #b0b0b0;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.15s ease;
-        }
-
-        .toggle-btn:hover {
-            background: #303034;
-        }
-
-        .toggle-btn.active {
-            background: #5c7aff;
-            border-color: #5c7aff;
-            color: white;
-        }
-
-        input[type="number"] {
+        .count-input input {
             width: 100%;
-            padding: 0.6rem 0.75rem;
-            border: 1px solid #3a3a3e;
-            background: #252529;
-            color: white;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        input[type="number"]:focus {
-            outline: none;
-            border-color: #5c7aff;
-        }
-
-        .generate-btn {
-            width: 100%;
-            padding: 1rem;
-            background: #5c7aff;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-
-        .generate-btn:hover {
-            background: #4a6aef;
-        }
-
-        .result {
-            background: #2a2a2e;
-            padding: 2rem;
-            border-radius: 12px;
+            padding: 0.6rem;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.9rem;
             text-align: center;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
-        .result-section {
-            margin-bottom: 1rem;
+        .count-input input:focus {
+            outline: none;
+            border-color: var(--text);
         }
 
-        .result-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .result-label {
+        .count-input span {
             font-size: 0.8rem;
-            color: #707070;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            color: var(--text-dim);
         }
 
-        .result-steps {
-            font-size: 1.5rem;
-            font-weight: 500;
-            line-height: 1.4;
-        }
-
-        .placeholder {
-            color: #505055;
+        /* Settings toggle */
+        .settings-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             font-size: 1.1rem;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            z-index: 101;
         }
 
-        .divider {
-            color: #404045;
-            margin: 0.5rem 0;
+        .settings-toggle:hover {
+            opacity: 1;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .display {
+                margin-bottom: 2rem;
+            }
+
+            .step-card {
+                font-size: 1rem;
+                padding: 0.5rem 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Jazz Solo Improv Practice</h1>
+    <div class="stage">
+        <div class="display" id="display">
+            <div class="display-placeholder">Tap to generate a combination</div>
+        </div>
 
-        <div class="controls">
-            <div class="control-group">
-                <label>Jazz Steps (start on)</label>
-                <div class="toggle-group" id="stepToggle">
-                    <button class="toggle-btn active" data-value="1">1 only</button>
-                    <button class="toggle-btn" data-value="8">8 only</button>
-                    <button class="toggle-btn" data-value="mixed">Mixed</button>
+        <div class="hit-zone" id="hitZone">
+            <span class="icon">↻</span>
+            <span class="label">Generate</span>
+        </div>
+    </div>
+
+    <div class="settings-toggle" id="settingsToggle">⚙</div>
+
+    <div class="drawer" id="drawer">
+        <div class="drawer-handle" id="drawerHandle">═══</div>
+        <div class="drawer-content">
+            <div class="drawer-section">
+                <div class="drawer-label">Steps start on</div>
+                <div class="mode-chips" id="modeChips">
+                    <button class="chip active" data-mode="1">1 only</button>
+                    <button class="chip" data-mode="8">8 only</button>
+                    <button class="chip" data-mode="mixed">Mixed</button>
                 </div>
             </div>
 
-            <div class="control-group">
-                <label for="jazzCount">Jazz Steps (N)</label>
-                <input type="number" id="jazzCount" value="2" min="1" max="10">
+            <div class="drawer-section">
+                <div class="drawer-label">Count</div>
+                <div class="count-inputs">
+                    <div class="count-input">
+                        <span>Jazz</span>
+                        <input type="number" id="jazzCount" value="2" min="1" max="8">
+                    </div>
+                    <div class="count-input">
+                        <span>Basic</span>
+                        <input type="number" id="basicCount" value="1" min="0" max="6">
+                    </div>
+                </div>
             </div>
-
-            <div class="control-group">
-                <label for="basicCount">Basic Steps (M)</label>
-                <input type="number" id="basicCount" value="1" min="0" max="10">
-            </div>
-
-            <button class="generate-btn" id="generateBtn">Generate</button>
-        </div>
-
-        <div class="result" id="result">
-            <div class="placeholder">Click Generate to start</div>
         </div>
     </div>
 
@@ -196,91 +374,114 @@
             startOn1: ['Rocks', 'Sis-ka-boom-sha', 'Scissor Kicks', 'Camel Walk'],
             startOn8: ['Apple Jacks', 'Shorty George', 'Suzie Q', 'Tacky Annie']
         };
-
         const basicSteps = ['Heel', 'Groove', 'Triples'];
+        const COUNTS = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧'];
 
-        let selectedMode = '1'; // '1', '8', or 'mixed'
+        let mode = '1';
+        let drawerOpen = false;
 
-        // Toggle handling
-        const toggleBtns = document.querySelectorAll('.toggle-btn');
-        toggleBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                toggleBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                selectedMode = btn.dataset.value;
-            });
+        // Settings drawer
+        const drawer = document.getElementById('drawer');
+        const drawerHandle = document.getElementById('drawerHandle');
+        const settingsToggle = document.getElementById('settingsToggle');
+
+        function toggleDrawer() {
+            drawerOpen = !drawerOpen;
+            drawer.classList.toggle('open', drawerOpen);
+        }
+
+        drawerHandle.addEventListener('click', toggleDrawer);
+        settingsToggle.addEventListener('click', () => {
+            if (!drawerOpen) toggleDrawer();
         });
 
-        // Random pick unique items from array, capped at pool size
+        // Close drawer when clicking outside
+        document.addEventListener('click', (e) => {
+            if (drawerOpen && !drawer.contains(e.target) && !settingsToggle.contains(e.target)) {
+                toggleDrawer();
+            }
+        });
+
+        // Mode chips
+        const modeChips = document.getElementById('modeChips');
+        modeChips.addEventListener('click', (e) => {
+            if (e.target.classList.contains('chip')) {
+                modeChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                e.target.classList.add('active');
+                mode = e.target.dataset.mode;
+            }
+        });
+
+        // Random helpers
         function pickRandom(arr, count) {
             const actualCount = Math.min(count, arr.length);
             const shuffled = [...arr].sort(() => Math.random() - 0.5);
             return shuffled.slice(0, actualCount);
         }
 
-        // Random pick unique items, excluding already picked
         function pickRandomExcluding(arr, count, exclude) {
             const available = arr.filter(item => !exclude.includes(item));
             return pickRandom(available, count);
         }
 
         // Generate
-        document.getElementById('generateBtn').addEventListener('click', () => {
+        function generate() {
             const n = parseInt(document.getElementById('jazzCount').value) || 2;
             const m = parseInt(document.getElementById('basicCount').value) || 1;
 
-            // Validate Mixed mode
-            if (selectedMode === 'mixed' && n < 2) {
-                document.getElementById('result').innerHTML = '<div class="placeholder">Mixed mode needs at least 2 Jazz steps (one from each category)</div>';
+            if (mode === 'mixed' && n < 2) {
+                document.getElementById('display').innerHTML =
+                    '<div class="display-placeholder">Mixed mode needs at least 2 jazz steps</div>';
                 return;
             }
 
             let selectedJazz = [];
 
-            if (selectedMode === '1') {
+            if (mode === '1') {
                 selectedJazz = pickRandom(jazzSteps.startOn1, n);
-            } else if (selectedMode === '8') {
+            } else if (mode === '8') {
                 selectedJazz = pickRandom(jazzSteps.startOn8, n);
             } else {
-                // Mixed: guarantee at least 1 from each category
                 const oneFrom1 = pickRandom(jazzSteps.startOn1, 1);
                 const oneFrom8 = pickRandom(jazzSteps.startOn8, 1);
-                const remainingCount = n - 2;
-                const mixedPool = [...jazzSteps.startOn1, ...jazzSteps.startOn8];
-                const alreadyPicked = [...oneFrom1, ...oneFrom8];
-                const remaining = pickRandomExcluding(mixedPool, remainingCount, alreadyPicked);
+                const remaining = pickRandomExcluding(
+                    [...jazzSteps.startOn1, ...jazzSteps.startOn8],
+                    n - 2,
+                    [...oneFrom1, ...oneFrom8]
+                );
                 selectedJazz = [...oneFrom1, ...oneFrom8, ...remaining].sort(() => Math.random() - 0.5);
             }
 
             const selectedBasic = pickRandom(basicSteps, m);
 
-            const resultDiv = document.getElementById('result');
-            let html = '';
+            const display = document.getElementById('display');
+            let html = '<div class="combo">';
 
-            if (selectedJazz.length > 0) {
-                html += `
-                    <div class="result-section">
-                        <div class="result-label">Jazz Steps</div>
-                        <div class="result-steps">${selectedJazz.join(' • ')}</div>
-                    </div>
-                `;
-            }
+            // Jazz steps
+            html += '<div class="combo-row">';
+            selectedJazz.forEach((step, i) => {
+                html += `<div class="step-card" style="animation-delay: ${i * 0.08}s">
+                    <span class="count">${COUNTS[i]}</span>${step}
+                </div>`;
+            });
+            html += '</div>';
 
-            if (selectedJazz.length > 0 && selectedBasic.length > 0) {
-                html += `<div class="divider">—</div>`;
-            }
-
+            // Basic steps
             if (selectedBasic.length > 0) {
-                html += `
-                    <div class="result-section">
-                        <div class="result-label">Basic Steps</div>
-                        <div class="result-steps">${selectedBasic.join(' • ')}</div>
-                    </div>
-                `;
+                html += '<div class="combo-row">';
+                selectedBasic.forEach((step, i) => {
+                    html += `<div class="step-card basic" style="animation-delay: ${(selectedJazz.length + i) * 0.08}s">
+                        <span class="count">${COUNTS[i]}</span>${step}
+                    </div>`;
+                });
+                html += '</div>';
             }
 
-            resultDiv.innerHTML = html;
-        });
+            html += '</div>';
+            display.innerHTML = html;
+        }
+
+        document.getElementById('hitZone').addEventListener('click', generate);
     </script>
 </body>
 </html>
