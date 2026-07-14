@@ -92,7 +92,7 @@ body::before {
 }
 
 .combo-section-label {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -111,9 +111,9 @@ body::before {
     background: var(--surface);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 12px;
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1.2rem;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -226,7 +226,7 @@ body::before {
 .hit-zone .label {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -316,7 +316,7 @@ body::before {
 }
 
 .drawer-label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -335,7 +335,7 @@ body::before {
     border-radius: 20px;
     background: transparent;
     color: var(--text);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.15s;
 }
@@ -438,7 +438,7 @@ body::before {
 .stepper-value {
     flex: 1;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text);
 }
@@ -481,7 +481,7 @@ body::before {
     }
 
     .step-card {
-        font-size: 1rem;
-        padding: 0.5rem 0.8rem;
+        font-size: 1.3rem;
+        padding: 0.7rem 1rem;
     }
 }
