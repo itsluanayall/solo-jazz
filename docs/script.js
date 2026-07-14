@@ -6,6 +6,7 @@ let mode = '1';
 let drawerOpen = false;
 let jazzCount = 2;
 let basicCount = 1;
+let qrCode = null;
 
 // Load steps from JSON
 async function loadSteps() {
@@ -223,6 +224,52 @@ document.addEventListener('keydown', (e) => {
         };
         createRipple(fakeEvent);
         generate();
+    }
+    // Close share modal on Escape
+    if (e.code === 'Escape') {
+        const shareModal = document.getElementById('shareModal');
+        if (shareModal.classList.contains('open')) {
+            shareModal.classList.remove('open');
+        }
+    }
+});
+
+// Share modal
+const shareToggle = document.getElementById('shareToggle');
+const shareModal = document.getElementById('shareModal');
+const shareModalClose = document.getElementById('shareModalClose');
+const shareQrCode = document.getElementById('shareQrCode');
+const shareUrl = document.getElementById('shareUrl');
+
+function openShareModal() {
+    const url = window.location.href;
+    shareUrl.textContent = url;
+
+    // Generate QR code
+    shareQrCode.innerHTML = '';
+    qrCode = new QRCode(shareQrCode, {
+        text: url,
+        width: 200,
+        height: 200,
+        colorDark: '#2C2F2D',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    shareModal.classList.add('open');
+}
+
+function closeShareModal() {
+    shareModal.classList.remove('open');
+}
+
+shareToggle.addEventListener('click', openShareModal);
+shareModalClose.addEventListener('click', closeShareModal);
+
+// Close share modal when clicking outside
+shareModal.addEventListener('click', (e) => {
+    if (e.target === shareModal) {
+        closeShareModal();
     }
 });
 

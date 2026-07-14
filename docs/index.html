@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <div class="stage">
@@ -23,7 +24,10 @@
         </div>
     </div>
 
-    <div class="settings-toggle" id="settingsToggle">⚙</div>
+    <div class="header-toggles">
+        <div class="share-toggle" id="shareToggle" title="Share">⤷</div>
+        <div class="settings-toggle" id="settingsToggle">⚙</div>
+    </div>
 
     <div class="drawer" id="drawer">
         <div class="drawer-handle" id="drawerHandle">═══</div>
@@ -58,6 +62,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Share QR Code Modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <button class="share-modal-close" id="shareModalClose">×</button>
+            <div class="share-modal-header">Share with a fellow dancer!</div>
+            <div class="share-modal-qr" id="shareQrCode"></div>
+            <div class="share-modal-url" id="shareUrl"></div>
         </div>
     </div>
 
