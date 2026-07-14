@@ -1,7 +1,56 @@
 {
   "jazz": {
-    "startOn1": ["Rocks", "Sis-ka-boom-sha", "Scissor Kicks", "Camel Walk"],
-    "startOn8": ["Apple Jacks", "Shorty George", "Suzie Q", "Tacky Annie"]
+    "startOn1": [
+      "Rocks",
+      "Sis-ka-boom-bah",
+      "Scissor Kicks",
+      "Camel Walk",
+      "Box Step",
+      "Charleston",
+      "Jump Charleston",
+      "Cross Over",
+      "Mambo",
+      "Boogie Drop",
+      "Skates",
+      "Itches",
+      "Scarecrow",
+      "Trenches",
+      "Truckin'",
+      "Squat Charleston",
+      "Crazy Legs",
+      "Pivot",
+      "Jig Walks",
+      "Fishtails",
+      "Cross Step"
+    ],
+    "startOn8": [
+      "Apple Jack",
+      "Shorty George",
+      "Suzie Q",
+      "Tacky Annie",
+      "Boogie Back",
+      "Boogie Forward",
+      "Half Break",
+      "Full Break",
+      "Stomp",
+      "Fall Off The Log",
+      "Eagle Slide",
+      "Gaze Afar",
+      "Knee Slap",
+      "Spank the Baby",
+      "Tabby the Cat",
+      "Shoe Shine",
+      "Eggbeater"
+    ]
   },
-  "basic": ["Heel", "Groove", "Triples"]
+  "basic": [
+    "Heel",
+    "Groove",
+    "Triples",
+    "Swivels",
+    "Spin",
+    "Slide",
+    "Kick-ball change",
+    "Kicks"
+  ]
 }
