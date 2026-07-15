@@ -9,6 +9,7 @@ let basicCount = 1;
 let maxJazzCount = 8;
 let maxBasicCount = 6;
 let qrCode = null;
+let videoPlayer = null;
 
 // Load steps from JSON
 async function loadSteps() {
@@ -181,12 +182,13 @@ function renderCombo(display) {
                     <path d="M8 5v14l11-7z"/>
                 </svg>`;
                 const cardWithIcon = `<div class="step-card" style="animation-delay: ${i * 0.08}s">${cardHtml}${playIcon}</div>`;
-                // Wrap in clickable link to YouTube video at timestamp
-                html += `<a href="https://www.youtube.com/watch?v=${source.videoId}&t=${stepVideo.timestamp}s"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="step-card-link"
-                           title="Watch ${step} in: ${source.title}">${cardWithIcon}</a>`;
+                // Create clickable button with data attributes
+                html += `<button class="step-card-link"
+                           data-step="${step}"
+                           data-source-id="${source.id}"
+                           data-timestamp="${stepVideo.timestamp}"
+                           title="Watch ${step} in: ${source.title}"
+                           type="button">${cardWithIcon}</button>`;
             } else {
                 html += cardContent;
             }
@@ -360,6 +362,72 @@ document.querySelectorAll('.share-btn').forEach(btn => {
             });
         }
     });
+});
+
+// Video modal
+const videoModal = document.getElementById('videoModal');
+const videoModalClose = document.getElementById('videoModalClose');
+const videoModalHeader = document.getElementById('videoModalHeader');
+const videoModalVideo = document.getElementById('videoModalVideo');
+const videoModalExternal = document.getElementById('videoModalExternal');
+
+function openVideoModal(step, sourceJson, timestamp) {
+    // Parse the JSON-encoded source object
+    const source = typeof sourceJson === 'string' ? JSON.parse(sourceJson) : sourceJson;
+
+    // Set header
+    videoModalHeader.textContent = step;
+
+    // Create YouTube iframe with autoplay and start time
+    const embedUrl = `https://www.youtube.com/embed/${source.videoId}?autoplay=1&start=${timestamp}`;
+    videoModalVideo.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+    // Set external link
+    videoModalExternal.href = `https://www.youtube.com/watch?v=${source.videoId}&t=${timestamp}s`;
+
+    // Show modal
+    videoModal.classList.add('open');
+}
+
+function closeVideoModal() {
+    videoModal.classList.remove('open');
+    // Clear video to stop playback
+    setTimeout(() => {
+        videoModalVideo.innerHTML = '';
+    }, 300);
+}
+
+videoModalClose.addEventListener('click', closeVideoModal);
+
+// Close video modal when clicking outside
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+        closeVideoModal();
+    }
+});
+
+// Event delegation for step card links
+document.addEventListener('click', (e) => {
+    const button = e.target.closest('.step-card-link');
+    if (button) {
+        const step = button.dataset.step;
+        const sourceId = button.dataset.sourceId;
+        const timestamp = parseInt(button.dataset.timestamp, 10);
+
+        if (step && sourceId && timestamp) {
+            const source = videoSources.find(s => s.id === sourceId);
+            if (source) {
+                openVideoModal(step, source, timestamp);
+            }
+        }
+    }
+});
+
+// Close video modal on Escape
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape' && videoModal.classList.contains('open')) {
+        closeVideoModal();
+    }
 });
 
 // Initialize

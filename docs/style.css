@@ -230,6 +230,11 @@ body::before {
     color: inherit;
     display: inline-block;
     position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
 }
 
 .step-card-link .step-card {
@@ -840,6 +845,128 @@ body::before {
 
 .share-btn.copy-success span {
     content: 'Copied!';
+}
+
+/* Video modal */
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.video-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-content {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    max-width: 640px;
+    width: 90%;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.9);
+    transition: transform var(--transition-base);
+    overflow: hidden;
+}
+
+.video-modal.open .video-modal-content {
+    transform: scale(1);
+}
+
+.video-modal-close {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    width: var(--size-icon-lg);
+    height: var(--size-icon-lg);
+    border: none;
+    background: var(--surface);
+    border-radius: 50%;
+    font-size: var(--font-size-2xl);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    transition: all var(--transition-fast);
+    touch-action: manipulation;
+    padding: 0;
+    z-index: 10;
+}
+
+.video-modal-close svg {
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+}
+
+.video-modal-close:hover {
+    background: var(--gray);
+    color: var(--white);
+}
+
+.video-modal-header {
+    font-family: var(--font-display);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--text);
+    padding: var(--space-lg) var(--space-xl) var(--space-md);
+}
+
+.video-modal-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--surface);
+}
+
+.video-modal-video iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-modal-footer {
+    padding: var(--space-md) var(--space-xl);
+    display: flex;
+    justify-content: center;
+}
+
+.video-modal-external {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background: var(--surface);
+    color: var(--text);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-decoration: none;
+    touch-action: manipulation;
+}
+
+.video-modal-external:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--coral);
+    color: var(--white);
+}
+
+.video-modal-external svg {
+    width: 16px;
+    height: 16px;
 }
 
 /* Reduced motion */
