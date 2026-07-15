@@ -176,12 +176,17 @@ function renderCombo(display) {
             // Look up the video source
             const source = videoSources.find(s => s.id === stepVideo.source);
             if (source && source.videoId && stepVideo.timestamp !== null && stepVideo.timestamp !== undefined) {
+                // Add play icon SVG
+                const playIcon = `<svg class="step-play-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>`;
+                const cardWithIcon = `<div class="step-card" style="animation-delay: ${i * 0.08}s">${cardHtml}${playIcon}</div>`;
                 // Wrap in clickable link to YouTube video at timestamp
                 html += `<a href="https://www.youtube.com/watch?v=${source.videoId}&t=${stepVideo.timestamp}s"
                            target="_blank"
                            rel="noopener noreferrer"
                            class="step-card-link"
-                           title="Watch ${step} in: ${source.title}">${cardContent}</a>`;
+                           title="Watch ${step} in: ${source.title}">${cardWithIcon}</a>`;
             } else {
                 html += cardContent;
             }

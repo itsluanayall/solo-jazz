@@ -200,6 +200,7 @@ body::before {
     gap: var(--space-sm);
     animation: cardIn 0.4s ease backwards;
     box-shadow: var(--shadow-sm);
+    position: relative;
 }
 
 .step-card.basic {
@@ -246,9 +247,8 @@ body::before {
     transform: translateY(0);
 }
 
-/* Video link indicator icon */
-.step-card-link::after {
-    content: '▶';
+/* Video play icon */
+.step-play-icon {
     position: absolute;
     bottom: -4px;
     right: -4px;
@@ -257,17 +257,14 @@ body::before {
     background: var(--coral);
     color: var(--white);
     border-radius: 50%;
-    font-size: 9px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 3px;
     opacity: 0;
     transition: opacity var(--transition-fast);
     pointer-events: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.step-card-link:hover::after {
+.step-card-link:hover .step-play-icon {
     opacity: 1;
 }
 
