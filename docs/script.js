@@ -1,5 +1,6 @@
 let jazzSteps = { startOn1: [], startOn8: [] };
 let basicSteps = [];
+let videoTimestamps = { videoId: '', timestamps: {} };
 let mode = '1';
 let drawerOpen = false;
 let jazzCount = 2;
@@ -18,6 +19,7 @@ async function loadSteps() {
         const data = await response.json();
         jazzSteps = data.jazz;
         basicSteps = data.basic;
+        videoTimestamps = data.videoTimestamps || { videoId: '', timestamps: {} };
         maxJazzCount = jazzSteps.startOn1.length + jazzSteps.startOn8.length;
         maxBasicCount = basicSteps.length;
         display.innerHTML = '<div class="display-placeholder">Tap to generate a combination</div>';
@@ -164,9 +166,20 @@ function renderCombo(display) {
     html += '<div class="combo-section-label">Jazz Steps</div>';
     html += '<div class="combo-row">';
     selectedJazz.forEach(({ step, startBeat }, i) => {
-        html += `<div class="step-card" style="animation-delay: ${i * 0.08}s">
-            <span class="step-badge">${startBeat}</span>${step}
-        </div>`;
+        const timestamp = videoTimestamps.timestamps[step];
+        const cardHtml = `<span class="step-badge">${startBeat}</span>${step}`;
+        const cardContent = `<div class="step-card" style="animation-delay: ${i * 0.08}s">${cardHtml}</div>`;
+
+        if (timestamp !== null && timestamp !== undefined && videoTimestamps.videoId) {
+            // Wrap in clickable link to YouTube video at timestamp
+            html += `<a href="https://www.youtube.com/watch?v=${videoTimestamps.videoId}&t=${timestamp}s"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="step-card-link"
+                       title="Watch ${step} in video">${cardContent}</a>`;
+        } else {
+            html += cardContent;
+        }
     });
     html += '</div></div>';
 
