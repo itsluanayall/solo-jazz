@@ -51,46 +51,194 @@
     "Spins",
     "Slides",
     "Kick-ball change",
-    "Kicks"
+    "Kicks",
+    "Shimmy",
+    "Hops"
   ],
-  "videoTimestamps": {
-    "videoId": "jAIwJd2tQo0",
-    "title": "Alphabetical Jazz Steps 3 (Chester Whitmore)",
-    "timestamps": {
-      "Rocks": 886,
-      "Sis-ka-boom-bah": 1021,
-      "Scissor Kicks": 971,
-      "Camel Walk": 260,
-      "Box Step": 112,
-      "Charleston": 339,
-      "Jump Charleston": 353,
-      "Cross Over": 449,
-      "Skates": 1043,
-      "Itches": 663,
-      "Scarecrow": 965,
-      "Truckin'": 1163,
-      "Squat Charleston": 378,
-      "Crazy Legs": 427,
-      "Jig Walks": 669,
-      "Fishtails": 541,
-      "Cross Step": 460,
-      "Apple Jacks": 9,
-      "Shorty George": 1035,
-      "Suzie Q": 1087,
-      "Tacky Annie": 1145,
-      "Boogie Back": 71,
-      "Boogie Forward": 89,
-      "Half Break": 212,
-      "Full Break": 148,
-      "Stomp": 1068,
-      "Fall Off The Log": 524,
-      "Eagle Slide": 482,
-      "Gaze Afar": 549,
-      "Knee Slap": 689,
-      "Spank the Baby": 1063,
-      "Tabby the Cat": 1097,
-      "Shoe Shine": 1031,
-      "Eggbeater": null
+  "videoSources": [
+    {
+      "id": "main",
+      "videoId": "jAIwJd2tQo0",
+      "title": "Alphabetical Jazz Steps 3 (Chester Whitmore)",
+      "channel": "Swingin' at the Savoy"
+    },
+    {
+      "id": "mambo-boogie",
+      "videoId": "LKvMBh1wKj4",
+      "title": "Solo Jazz Spotlights - Mambo Steps & Boogie Drops",
+      "channel": "The Swing Project"
+    },
+    {
+      "id": "eggbeater",
+      "videoId": "IwougxpH9Z8",
+      "title": "Eggbeaters - Vernacular Jazz Explained",
+      "channel": "Laura Glaess"
+    },
+    {
+      "id": "vernacular-vocab",
+      "videoId": "3H8CbE1bjy8",
+      "title": "Vernacular Solo Jazz Vocabulary for Lindy Hop and Swing",
+      "channel": "Swingin' at the Savoy"
+    },
+    {
+      "id": "pivot",
+      "videoId": "oxYeeqTm3H8",
+      "title": "Pivots solo jazz dance move",
+      "channel": "Elena Brazhnyk"
+    }
+  ],
+  "stepVideos": {
+    "Rocks": {
+      "source": "main",
+      "timestamp": 886
+    },
+    "Sis-ka-boom-bah": {
+      "source": "main",
+      "timestamp": 1021
+    },
+    "Scissor Kicks": {
+      "source": "main",
+      "timestamp": 971
+    },
+    "Camel Walk": {
+      "source": "main",
+      "timestamp": 260
+    },
+    "Box Step": {
+      "source": "main",
+      "timestamp": 112
+    },
+    "Charleston": {
+      "source": "main",
+      "timestamp": 339
+    },
+    "Jump Charleston": {
+      "source": "main",
+      "timestamp": 353
+    },
+    "Cross Over": {
+      "source": "main",
+      "timestamp": 449
+    },
+    "Mambo": {
+      "source": "mambo-boogie",
+      "timestamp": 0
+    },
+    "Boogie Drop": {
+      "source": "mambo-boogie",
+      "timestamp": 75
+    },
+    "Skates": {
+      "source": "main",
+      "timestamp": 1043
+    },
+    "Itches": {
+      "source": "main",
+      "timestamp": 663
+    },
+    "Scarecrow": {
+      "source": "main",
+      "timestamp": 965
+    },
+    "Trenches": {
+      "source": "vernacular-vocab",
+      "timestamp": 548
+    },
+    "Truckin'": {
+      "source": "main",
+      "timestamp": 1163
+    },
+    "Squat Charleston": {
+      "source": "main",
+      "timestamp": 378
+    },
+    "Crazy Legs": {
+      "source": "main",
+      "timestamp": 427
+    },
+    "Pivot": {
+      "source": "pivot",
+      "timestamp": 0
+    },
+    "Jig Walks": {
+      "source": "main",
+      "timestamp": 669
+    },
+    "Fishtails": {
+      "source": "main",
+      "timestamp": 541
+    },
+    "Cross Step": {
+      "source": "main",
+      "timestamp": 460
+    },
+    "Apple Jacks": {
+      "source": "main",
+      "timestamp": 9
+    },
+    "Shorty George": {
+      "source": "main",
+      "timestamp": 1035
+    },
+    "Suzie Q": {
+      "source": "main",
+      "timestamp": 1087
+    },
+    "Tacky Annie": {
+      "source": "main",
+      "timestamp": 1145
+    },
+    "Boogie Back": {
+      "source": "main",
+      "timestamp": 71
+    },
+    "Boogie Forward": {
+      "source": "main",
+      "timestamp": 89
+    },
+    "Half Break": {
+      "source": "main",
+      "timestamp": 212
+    },
+    "Full Break": {
+      "source": "main",
+      "timestamp": 148
+    },
+    "Stomp": {
+      "source": "main",
+      "timestamp": 1068
+    },
+    "Fall Off The Log": {
+      "source": "main",
+      "timestamp": 524
+    },
+    "Eagle Slide": {
+      "source": "main",
+      "timestamp": 482
+    },
+    "Gaze Afar": {
+      "source": "main",
+      "timestamp": 549
+    },
+    "Knee Slap": {
+      "source": "main",
+      "timestamp": 689
+    },
+    "Spank the Baby": {
+      "source": "main",
+      "timestamp": 1063
+    },
+    "Tabby the Cat": {
+      "source": "main",
+      "timestamp": 1097
+    },
+    "Shoe Shine": {
+      "source": "main",
+      "timestamp": 1031
+    },
+    "Eggbeater": {
+      "source": "eggbeater",
+      "timestamp": 53
     }
   }
 }

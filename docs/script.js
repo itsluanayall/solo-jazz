@@ -1,6 +1,7 @@
 let jazzSteps = { startOn1: [], startOn8: [] };
 let basicSteps = [];
-let videoTimestamps = { videoId: '', timestamps: {} };
+let videoSources = [];
+let stepVideos = {};
 let mode = '1';
 let drawerOpen = false;
 let jazzCount = 2;
@@ -19,7 +20,8 @@ async function loadSteps() {
         const data = await response.json();
         jazzSteps = data.jazz;
         basicSteps = data.basic;
-        videoTimestamps = data.videoTimestamps || { videoId: '', timestamps: {} };
+        videoSources = data.videoSources || [];
+        stepVideos = data.stepVideos || {};
         maxJazzCount = jazzSteps.startOn1.length + jazzSteps.startOn8.length;
         maxBasicCount = basicSteps.length;
         display.innerHTML = '<div class="display-placeholder">Tap to generate a combination</div>';
@@ -166,17 +168,23 @@ function renderCombo(display) {
     html += '<div class="combo-section-label">Jazz Steps</div>';
     html += '<div class="combo-row">';
     selectedJazz.forEach(({ step, startBeat }, i) => {
-        const timestamp = videoTimestamps.timestamps[step];
+        const stepVideo = stepVideos[step];
         const cardHtml = `<span class="step-badge">${startBeat}</span>${step}`;
         const cardContent = `<div class="step-card" style="animation-delay: ${i * 0.08}s">${cardHtml}</div>`;
 
-        if (timestamp !== null && timestamp !== undefined && videoTimestamps.videoId) {
-            // Wrap in clickable link to YouTube video at timestamp
-            html += `<a href="https://www.youtube.com/watch?v=${videoTimestamps.videoId}&t=${timestamp}s"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="step-card-link"
-                       title="Watch ${step} in video">${cardContent}</a>`;
+        if (stepVideo && stepVideo.source) {
+            // Look up the video source
+            const source = videoSources.find(s => s.id === stepVideo.source);
+            if (source && source.videoId && stepVideo.timestamp !== null && stepVideo.timestamp !== undefined) {
+                // Wrap in clickable link to YouTube video at timestamp
+                html += `<a href="https://www.youtube.com/watch?v=${source.videoId}&t=${stepVideo.timestamp}s"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="step-card-link"
+                           title="Watch ${step} in: ${source.title}">${cardContent}</a>`;
+            } else {
+                html += cardContent;
+            }
         } else {
             html += cardContent;
         }
