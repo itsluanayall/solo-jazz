@@ -136,17 +136,22 @@ function renderCombo(display) {
     let selectedJazz = [];
 
     if (mode === '1') {
-        selectedJazz = pickRandom(jazzSteps.startOn1, n);
+        selectedJazz = pickRandom(jazzSteps.startOn1, n).map(step => ({ step, startBeat: 1 }));
     } else if (mode === '8') {
-        selectedJazz = pickRandom(jazzSteps.startOn8, n);
+        selectedJazz = pickRandom(jazzSteps.startOn8, n).map(step => ({ step, startBeat: 8 }));
     } else {
-        const oneFrom1 = pickRandom(jazzSteps.startOn1, 1);
-        const oneFrom8 = pickRandom(jazzSteps.startOn8, 1);
-        const remaining = pickRandomExcluding(
+        const oneFrom1 = pickRandom(jazzSteps.startOn1, 1).map(step => ({ step, startBeat: 1 }));
+        const oneFrom8 = pickRandom(jazzSteps.startOn8, 1).map(step => ({ step, startBeat: 8 }));
+        const remainingSteps = pickRandomExcluding(
             [...jazzSteps.startOn1, ...jazzSteps.startOn8],
             n - 2,
-            [...oneFrom1, ...oneFrom8]
+            [...oneFrom1.map(s => s.step), ...oneFrom8.map(s => s.step)]
         );
+        // Tag remaining steps with their start beat
+        const remaining = remainingSteps.map(step => ({
+            step,
+            startBeat: jazzSteps.startOn1.includes(step) ? 1 : 8
+        }));
         selectedJazz = [...oneFrom1, ...oneFrom8, ...remaining].sort(() => Math.random() - 0.5);
     }
 
@@ -158,8 +163,10 @@ function renderCombo(display) {
     html += '<div class="combo-section">';
     html += '<div class="combo-section-label">Jazz Steps</div>';
     html += '<div class="combo-row">';
-    selectedJazz.forEach((step, i) => {
-        html += `<div class="step-card" style="animation-delay: ${i * 0.08}s">${step}</div>`;
+    selectedJazz.forEach(({ step, startBeat }, i) => {
+        html += `<div class="step-card" style="animation-delay: ${i * 0.08}s">
+            <span class="step-badge">${startBeat}</span>${step}
+        </div>`;
     });
     html += '</div></div>';
 
@@ -275,7 +282,7 @@ document.querySelectorAll('.share-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const platform = btn.dataset.platform;
         const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent('Check out this Jazz Solo Practice app!');
+        const text = encodeURIComponent('Check out this Jazz Solo Improv app!');
 
         if (platform === 'whatsapp') {
             window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
