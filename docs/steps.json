@@ -8,7 +8,7 @@
       "Box Step",
       "Charleston",
       "Jump Charleston",
-      "Cross Over",
+      "Crossover",
       "Mambo",
       "Boogie Drop",
       "Skates",
@@ -32,7 +32,7 @@
       "Boogie Forward",
       "Half Break",
       "Full Break",
-      "Stomp",
+      "Stomp Off",
       "Fall Off The Log",
       "Eagle Slide",
       "Gaze Afar",
@@ -40,7 +40,7 @@
       "Spank the Baby",
       "Tabby the Cat",
       "Shoe Shine",
-      "Eggbeater"
+      "Eggbeaters"
     ]
   },
   "basic": [
@@ -63,22 +63,16 @@
       "channel": "Swingin' at the Savoy"
     },
     {
-      "id": "mambo-boogie",
-      "videoId": "LKvMBh1wKj4",
-      "title": "Solo Jazz Spotlights - Mambo Steps & Boogie Drops",
-      "channel": "The Swing Project"
-    },
-    {
-      "id": "eggbeater",
-      "videoId": "IwougxpH9Z8",
-      "title": "Eggbeaters - Vernacular Jazz Explained",
-      "channel": "Laura Glaess"
+      "id": "mambo",
+      "videoId": "bPjkjv4tXbE",
+      "title": "Solo Jazz : Mambo Step",
+      "channel": "Triple Crown Swing Dance Academy"
     },
     {
       "id": "vernacular-vocab",
       "videoId": "3H8CbE1bjy8",
       "title": "Vernacular Solo Jazz Vocabulary for Lindy Hop and Swing",
-      "channel": "Swingin' at the Savoy"
+      "channel": "Laura Glaess"
     },
     {
       "id": "pivot",
@@ -116,17 +110,17 @@
       "source": "main",
       "timestamp": 353
     },
-    "Cross Over": {
+    "Crossover": {
       "source": "main",
       "timestamp": 449
     },
     "Mambo": {
-      "source": "mambo-boogie",
+      "source": "mambo",
       "timestamp": 0
     },
     "Boogie Drop": {
-      "source": "mambo-boogie",
-      "timestamp": 75
+      "source": "vernacular-vocab",
+      "timestamp": 567
     },
     "Skates": {
       "source": "main",
@@ -204,7 +198,7 @@
       "source": "main",
       "timestamp": 148
     },
-    "Stomp": {
+    "Stomp Off": {
       "source": "main",
       "timestamp": 1068
     },
@@ -236,9 +230,9 @@
       "source": "main",
       "timestamp": 1031
     },
-    "Eggbeater": {
-      "source": "eggbeater",
-      "timestamp": 53
+    "Eggbeaters": {
+      "source": "vernacular-vocab",
+      "timestamp": 704
     }
   }
 }
