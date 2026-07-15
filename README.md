@@ -1,6 +1,6 @@
-# Jazz Solo Practice
+# Jazz Solo Improv
 
-Generate random jazz + basic step combinations for dance practice.
+Generate random jazz solo + basic step combinations for dance practice.
 
 ## Use
 
