@@ -66,7 +66,8 @@
       "id": "mambo",
       "videoId": "bPjkjv4tXbE",
       "title": "Solo Jazz : Mambo Step",
-      "channel": "Triple Crown Swing Dance Academy"
+      "channel": "Triple Crown Swing Dance Academy",
+      "noEmbed": true
     },
     {
       "id": "vernacular-vocab",
@@ -78,7 +79,8 @@
       "id": "pivot",
       "videoId": "oxYeeqTm3H8",
       "title": "Pivots solo jazz dance move",
-      "channel": "Elena Brazhnyk"
+      "channel": "Elena Brazhnyk",
+      "noEmbed": true
     }
   ],
   "stepVideos": {

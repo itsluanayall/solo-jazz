@@ -410,14 +410,25 @@ videoModal.addEventListener('click', (e) => {
 document.addEventListener('click', (e) => {
     const button = e.target.closest('.step-card-link');
     if (button) {
+        e.preventDefault();
+        e.stopPropagation();
         const step = button.dataset.step;
         const sourceId = button.dataset.sourceId;
         const timestamp = parseInt(button.dataset.timestamp, 10);
 
-        if (step && sourceId && timestamp) {
-            const source = videoSources.find(s => s.id === sourceId);
-            if (source) {
-                openVideoModal(step, source, timestamp);
+        if (step && sourceId && (timestamp !== null && timestamp !== undefined)) {
+            const stepVideo = stepVideos[step];
+            if (stepVideo && stepVideo.source) {
+                const source = videoSources.find(s => s.id === stepVideo.source);
+                if (source) {
+                    // For videos with noEmbed, open directly in YouTube
+                    if (source.noEmbed) {
+                        window.open(`https://www.youtube.com/watch?v=${source.videoId}&t=${timestamp}s`, '_blank');
+                    } else {
+                        // For embeddable videos, open the modal
+                        openVideoModal(step, source, timestamp);
+                    }
+                }
             }
         }
     }
